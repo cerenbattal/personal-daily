@@ -5,6 +5,6 @@
 
 .dashboard__headerTitle {
   color: #0f0f0f;
-  font-size: 12px;
-  display: inline-block;
+  font-size: 32px;
+  font-family: "Pacifico", cursive;
 }
