@@ -1,0 +1,13 @@
+.comment__picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 5%;
+  background-image: url("./profilepic.jpg");
+  background-position: center center;
+  background-size: cover;
+  margin: 0.5rem;
+}
+
+.comment {
+  align-self: center;
+}

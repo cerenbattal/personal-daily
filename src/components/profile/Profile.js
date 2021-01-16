@@ -1,18 +1,27 @@
 import React from 'react'
 import "./Profile.css";
 import { Card, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 function Profile() {
     return (
         <div className="profile">
             <Card className="text-center">
             <Card.Header>
-                <Nav variant="pills" defaultActiveKey="#profile">
+                <Nav variant="pills">
                     <Nav.Item>
-                    <Nav.Link href="#profile">Profile</Nav.Link>
+                        <Nav.Link>
+                            <Link to="/profile"> 
+                                Profile
+                            </Link>
+                        </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                    <Nav.Link href="#lastcomments">Your last comments</Nav.Link>
+                        <Nav.Link> 
+                            <Link to="/last-comments"> 
+                                Your last comments
+                            </Link>
+                        </Nav.Link>
                     </Nav.Item>
                 </Nav>
             </Card.Header>
