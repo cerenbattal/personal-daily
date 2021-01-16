@@ -14,14 +14,17 @@ function Dashboard() {
                     <Navbar.Toggle />
                     <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
-                        Signed in as: <Link to="/profile">cebattal</Link>
+                        <img 
+                            className="profile__picture" 
+                            style={{ width: '50px', height: '50px', marginRight: '0.5rem' }} 
+                        /> 
+                        <Link style={{ color: '#0056b3'}} to="/profile">cebattal</Link>
                     </Navbar.Text>
                     </Navbar.Collapse>
                 </Navbar>
             </div>
             {/** Post */}
             <DailyImage/>
-            {/** On the side panel, the user's last five comments and their images will be shown */}
 
         </div>
     )
