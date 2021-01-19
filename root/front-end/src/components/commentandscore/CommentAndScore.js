@@ -14,7 +14,7 @@ class CommentAndScore extends Component {
                 <div className="comment">
                     <Form.Group className="comment__section" controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="comment__label">How do you feel about today's image?</Form.Label>
-                        <Form.Control as="textarea" rows={3} />
+                        <Form.Control as="textarea" rows={3} maxlength="100" />
                     </Form.Group>   
                 </div>
                 <div className="score">
