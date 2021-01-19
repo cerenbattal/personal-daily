@@ -3,6 +3,8 @@ import Login from "./login/Login";
 import Profile from "./profile/Profile";
 import Dashboard from "./dashboard/Dashboard";
 import LastComments from "./lastcomments/LastComments";
+import AdminPanel from "./adminpanel/AdminPanel";
+import LastPosts from "./lastposts/LastPosts";
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -17,6 +19,8 @@ function App() {
               <Route path="/signup" component={SignUp} />
               <Route path="/login" component={Login} />
               <Route path="/profile" component={Profile} />
+              <Route path="/admin-panel" component={AdminPanel} />
+              <Route path="/last-posts" component={LastPosts} />
               <Route path="/last-comments" component={LastComments} />
             </Switch>
           </Router>

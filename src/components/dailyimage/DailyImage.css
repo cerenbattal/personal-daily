@@ -3,3 +3,7 @@
   object-fit: contain;
   margin-bottom: 0.5rem;
 }
+
+.post__averageScore {
+  font-size: 1.5rem;
+}
