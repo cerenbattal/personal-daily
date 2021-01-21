@@ -2,68 +2,84 @@ const db = require("../models");
 const Images = db.images;
 const Comments = db.comments;
 
-exports.saveImage = (image) => {
+exports.saveImage = (req, res) => {
     return Images.create({
-        source: image.source,
-        posted_date: image.posted_date,
-        average_score: image.average_score,
+        source: req.body.source,
+        posted_date: req.body.posted_date,
+        average_score: req.body.average_score,
     })
-        .then((image) => {
-            console.log(">> Created image: " + JSON.stringify(image, null, 4));
-            return image;
+        .then(() => {
+            res.send({ message: "Image was saved successfully!" });
         })
         .catch((err) => {
-            console.log(">> Error while saving image: ", err);
+            res.status(500).send({ message: err.message });
         });
 };
 
-exports.saveComment = (imageId, comment) => {
+exports.saveComment = (req, res) => {
     return Comments.create({
-        commentText: comment.commentText,
-        score: comment.score,
-        imageId: imageId,
+        commentText: req.body.commentText,
+        score: req.body.score,
+        imageId: req.body.imageId,
     })
-        .then((comment) => {
-            console.log(">> Created comment: " + JSON.stringify(comment, null, 4));
-            return comment;
+        .then(() => {
+            res.send({ message: "Comment was saved successfully!" });
         })
         .catch((err) => {
-            console.log(">> Error while creating comment: ", err);
+            res.status(500).send({ message: err.message });
         });
 };
 
-exports.findImageByDate = (date) => {
+exports.findImageByDate = (req, res) => {
     return Images.findAll({
         where: {
-            posted_date: date
+            posted_date: req.params.date
         }
     })
         .then((data) => {
-            return data[0].dataValues.source;
+            if (!data) {
+                return res.status(404).send({ message: "Comments not found!" });
+            }
+            res.status(200).send({
+                imgData: data[0].dataValues.source
+            });
         })
         .catch((err) => {
-            console.log(">> Error while finding image: ", err);
+            res.status(500).send({ message: err.message });
         });
 };
 
-exports.findCommentsByImageId = (id) => {
+exports.findCommentsByImageId = (req, res) => {
     return Comments.findAll({
         where: {
-            imageId: id
+            imageId: req.params.id
         }
     })
         .then((comment) => {
-            return comment;
+            if (!comment) {
+                return res.status(404).send({ message: "Comments not found!" });
+            }
+            res.status(200).send({
+                commentArray: comment
+            });
         })
         .catch((err) => {
-            console.log(">> Error while finding comment: ", err);
+            res.status(500).send({ message: err.message });
         });
 };
 
-exports.findAll = () => {
+exports.findAll = (req, res) => {
     return Images.findAll({
       include: ["comments"],
     }).then((images) => {
-      return images;
+        if (!images) {
+            return res.status(404).send({ message: "Images not found!" });
+        }
+        console.log("MADAFAKA", images)
+        res.status(200).send({
+            imageArray: images
+        });
+    }).catch((err) => {
+        res.status(500).send({ message: err.message });
     });
-};
+  };

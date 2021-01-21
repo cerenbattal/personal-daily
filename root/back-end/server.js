@@ -11,14 +11,13 @@ const controller = require("./app/controllers/images.controller");
 //   console.log('Drop and Resync Db');
 //   initial();
 // });
-
-const run = async () => {
-  const tut1 = await controller.findAll();
-  console.log(JSON.stringify(tut1, null, 2));
-};
+// const run = async () => {
+//   const tut1 = await controller.findAll();
+//   console.log(JSON.stringify(tut1, null, 2));
+// };
 
 // FOR PRODUCTION
-db.sequelize.sync().then(()=>run());
+db.sequelize.sync();
 
 app.use(cors());
 
@@ -35,6 +34,7 @@ app.get("/", (req, res) => {
 
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
+require('./app/routes/images.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
