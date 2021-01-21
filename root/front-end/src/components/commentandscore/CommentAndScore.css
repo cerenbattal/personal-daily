@@ -10,10 +10,14 @@
   background-color: #438cb9;
   border: none;
   color: white;
-  padding: 15px;
+  padding: 10px 25px;
+  margin-bottom: 1rem;
   border-radius: 50px;
   font-weight: 500;
   text-decoration: none;
+  float: right;
+  letter-spacing: 2px;
+  transition: 0.3s all ease-in-out;
 }
 .comment__submit:active {
   background-color: #438cb9;
@@ -21,4 +25,16 @@
 
 .comment__submit:hover {
   background-color: #3d81ab;
+}
+
+.comment__form {
+  resize: none !important;
+  border: lightgray;
+}
+
+.comment__form:focus {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+  border-color: transparent;
 }

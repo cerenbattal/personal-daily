@@ -1,20 +1,24 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
 const app = express();
 const db = require("./app/models");
 const Role = db.role;
+const controller = require("./app/controllers/images.controller");
 
 // FOR DEVELOPMENT (FIRST TIME USE)
-/*db.sequelize.sync({ force: true }).then(() => {
-  console.log('Drop and Resync Db');
-  initial();
-});*/
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log('Drop and Resync Db');
+//   initial();
+// });
+
+const run = async () => {
+  const tut1 = await controller.findAll();
+  console.log(JSON.stringify(tut1, null, 2));
+};
 
 // FOR PRODUCTION
-db.sequelize.sync();
-
+db.sequelize.sync().then(()=>run());
 
 app.use(cors());
 
@@ -43,7 +47,7 @@ function initial() {
     id: 1,
     name: "user"
   });
-
+  
   Role.create({
     id: 2,
     name: "admin"
