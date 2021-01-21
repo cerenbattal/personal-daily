@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 class Profile extends Component {
     render() {
+        const user = JSON.parse(localStorage.getItem('user'));
         return (
             <div className="profile">
                 {/** Header */}
@@ -34,9 +35,9 @@ class Profile extends Component {
                 
                 <Card.Body>
                 <img className="profile__picture" />
-                    <Card.Title>cebattal</Card.Title>
+                    <Card.Title>{user.username}</Card.Title>
                     <Card.Text>
-                        cerenbattal97@gmail.com
+                        {user.email}
                     </Card.Text>
                 </Card.Body>
             </Card>

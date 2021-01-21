@@ -5,18 +5,18 @@ import './Header.css';
 
 class Header extends Component {
     render() {
+        const user = JSON.parse(localStorage.getItem('user'));
         return (
             <div className="dashboard__header">
                     <Navbar>
-                        <Navbar.Brand className="dashboard__headerTitle">Personal Daily</Navbar.Brand>
+                        <Link to="/dashboard">
+                            <Navbar.Brand className="dashboard__headerTitle">Personal Daily</Navbar.Brand>
+                        </Link>
                         <Navbar.Toggle />
                         <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
-                            <img 
-                                className="profile__picture" 
-                                style={{ width: '50px', height: '50px', marginRight: '0.5rem' }} 
-                            /> 
-                            <Link style={{ color: '#0056b3'}} to="/profile">cebattal</Link>
+                            <img className="header__profile" /> 
+                            <Link style={{ color: '#0056b3'}} to="/profile">{user.username}</Link>
                         </Navbar.Text>
                         </Navbar.Collapse>
                     </Navbar>

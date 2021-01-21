@@ -3,3 +3,20 @@
   font-size: 2rem !important;
   font-family: "Pacifico", cursive;
 }
+
+.header__profile {
+  width: 50px;
+  height: 50px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background-image: url("./profilepic.jpg");
+  background-position: center center;
+  background-size: cover;
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar-expand,
+  .header__profile {
+    max-width: 100px;
+  }
+}

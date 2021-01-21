@@ -8,7 +8,10 @@ import { Form } from "react-bootstrap"
 class DailyImage extends Component {
     constructor(props) {
         super(props);
-        this.setColorForGoodAndBadAvg = this.setColorForGoodAndBadAvg.bind(this);
+        this.state = {
+            avgScore: "",
+            post: ""
+        };
     }
     setColorForGoodAndBadAvg = (avgScore) => {
         if(avgScore > 0 && avgScore < 5) {
