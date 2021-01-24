@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactStars from "react-rating-stars-component";
 import "./CommentAndScore.css" 
 import { Form } from "react-bootstrap";
+import postService from "../../services/postService";
 
 class CommentAndScore extends Component {
 
@@ -9,6 +10,21 @@ class CommentAndScore extends Component {
         event.preventDefault();
         console.log(this.state.rating)
         console.log(this.state.commentText)
+        const user = JSON.parse(localStorage.getItem('user'));
+        const userId = user.id;
+        postService.saveComment(this.state.commentText, this.state.rating, 1, userId).then(
+            (response) => {
+                console.log(response)
+            },
+            error => {
+                const resMessage =
+                    (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                    error.message ||
+                    error.toString();
+            }
+        );
     }
 
     onChangeRating = (newRating) => {
