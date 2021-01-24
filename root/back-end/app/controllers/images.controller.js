@@ -17,13 +17,15 @@ exports.saveImage = (req, res) => {
 };
 
 exports.saveComment = (req, res) => {
+    console.log(req);
     return Comments.create({
-        commentText: req.body.commentText,
+        comment_text: req.body.comment_text,
         score: req.body.score,
-        imageId: req.body.imageId,
+        image_id: req.body.image_id,
+        user_id: req.body.user_id
     })
         .then(() => {
-            res.send({ message: "Comment was saved successfully!" });
+            res.status(200).send({ message: "Comment was saved successfully!" });
         })
         .catch((err) => {
             res.status(500).send({ message: err.message });
@@ -52,7 +54,7 @@ exports.findImageByDate = (req, res) => {
 exports.findCommentsByImageId = (req, res) => {
     return Comments.findAll({
         where: {
-            imageId: req.params.id
+            image_id: req.params.id
         }
     })
         .then((comment) => {
