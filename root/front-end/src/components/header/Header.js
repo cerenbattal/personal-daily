@@ -6,6 +6,10 @@ import './Header.css';
 class Header extends Component {
     render() {
         const user = JSON.parse(localStorage.getItem('user'));
+        const userProfilePic = JSON.parse(localStorage.getItem('userProfilePic'));
+        const profile_picture = {
+            backgroundImage: `url(${userProfilePic.profilePic})`
+        };
         return (
             <div className="dashboard__header">
                     <Navbar>
@@ -15,7 +19,7 @@ class Header extends Component {
                         <Navbar.Toggle />
                         <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
-                            <img className="header__profile" /> 
+                            <img style={profile_picture} className="header__profile" /> 
                             <Link style={{ color: '#0056b3'}} to="/profile">{user.username}</Link>
                         </Navbar.Text>
                         </Navbar.Collapse>

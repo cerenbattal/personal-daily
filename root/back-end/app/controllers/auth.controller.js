@@ -87,18 +87,22 @@ exports.signin = (req, res) => {
 };
 
 exports.findProfilePic = (req, res) => {
-    return User.findAll({
+    console.log("DDDDDDDDDDDDDDD USER IDDDDDDDD:", req.body.user_id)
+    console.log("REQUEST.QUERY.ID:", req.query.id)
+    return User.findOne({
         attributes: ['profilePic'],
         where: {
-            id: req.body.user_id
+            id: req.query.id
         }
     }).then((profilePic) => {
         if (!profilePic) {
             return res.status(404).send({ message: "Profile pic not found!" });
         }
-        console.log("response:", profilePic)
+        console.log("DATA VALUEEEEEEEESSS: ", profilePic.dataValues.profilePic);
+        console.log("response:", profilePic);
+        
         res.status(200).send({
-            profilePic: profilePic
+            profilePic: profilePic.dataValues.profilePic
         });
     }).catch((err) => {
         res.status(500).send({ message: err.message });
