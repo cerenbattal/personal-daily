@@ -33,6 +33,17 @@ class AuthService {
     getCurrentUser() {
         return JSON.parse(localStorage.getItem('user'));
     }
+
+    findProfilePicOfUser(user_id) {
+        return axios.get(API_URL + "profilepic", {
+            user_id
+        })
+        .then(response => {
+            if (response) {
+                localStorage.setItem("userProfilePic", JSON.stringify(response.data));
+            }
+        })
+    }
 }
 
 export default new AuthService();

@@ -8,12 +8,12 @@ exports.saveImage = (req, res) => {
         posted_date: req.body.posted_date,
         average_score: req.body.average_score,
     })
-        .then(() => {
-            res.send({ message: "Image was saved successfully!" });
-        })
-        .catch((err) => {
-            res.status(500).send({ message: err.message });
-        });
+    .then(() => {
+        res.send({ message: "Image was saved successfully!" });
+    })
+    .catch((err) => {
+        res.status(500).send({ message: err.message });
+    });
 };
 
 exports.saveComment = (req, res) => {
@@ -24,31 +24,32 @@ exports.saveComment = (req, res) => {
         image_id: req.body.image_id,
         user_id: req.body.user_id
     })
-        .then(() => {
-            res.status(200).send({ message: "Comment was saved successfully!" });
-        })
-        .catch((err) => {
-            res.status(500).send({ message: err.message });
-        });
+    .then(() => {
+        res.status(200).send({ message: "Comment was saved successfully!" });
+    })
+    .catch((err) => {
+        res.status(500).send({ message: err.message });
+    });
 };
 
+//TODO
 exports.findImageByDate = (req, res) => {
     return Images.findAll({
         where: {
             posted_date: req.params.date
         }
     })
-        .then((data) => {
-            if (!data) {
-                return res.status(404).send({ message: "Comments not found!" });
-            }
-            res.status(200).send({
-                imgData: data[0].dataValues.source
-            });
-        })
-        .catch((err) => {
-            res.status(500).send({ message: err.message });
+    .then((data) => {
+        if (!data) {
+            return res.status(404).send({ message: "Comments not found!" });
+        }
+        res.status(200).send({
+            imgData: data[0].dataValues.source
         });
+    })
+    .catch((err) => {
+        res.status(500).send({ message: err.message });
+    });
 };
 
 exports.findCommentsByImageId = (req, res) => {
@@ -57,17 +58,17 @@ exports.findCommentsByImageId = (req, res) => {
             image_id: req.params.id
         }
     })
-        .then((comment) => {
-            if (!comment) {
-                return res.status(404).send({ message: "Comments not found!" });
-            }
-            res.status(200).send({
-                commentArray: comment
-            });
-        })
-        .catch((err) => {
-            res.status(500).send({ message: err.message });
+    .then((comment) => {
+        if (!comment) {
+            return res.status(404).send({ message: "Comments not found!" });
+        }
+        res.status(200).send({
+            commentArray: comment
         });
+    })
+    .catch((err) => {
+        res.status(500).send({ message: err.message });
+    });
 };
 
 exports.findAll = (req, res) => {

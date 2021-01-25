@@ -33,7 +33,6 @@ class App extends Component {
     AuthService.logout();
   }
 
-  //const user = JSON.parse(localStorage.getItem('user'));
   render() {
     const { currentUser, showAdminBoard } = this.state;
     return (
@@ -44,11 +43,11 @@ class App extends Component {
               <Switch>
                 <Route exact path={["/", "/login"]} component={Login} />
                 <Route path="/signup" component={SignUp} />
-                <Route path="/dashboard" component={Dashboard} />
-                <Route path="/profile" component={Profile} />
-                <Route path="/admin-panel" component={AdminPanel} />
-                <Route path="/last-posts" component={LastPosts} />
-                <Route path="/last-comments" component={LastComments} />
+                <Route user={currentUser} path="/dashboard" component={Dashboard} />
+                <Route user={currentUser} path="/profile" component={Profile} />
+                <Route user={currentUser} path="/admin-panel" component={AdminPanel} />
+                <Route user={currentUser} path="/last-posts" component={LastPosts} />
+                <Route user={currentUser} path="/last-comments" component={LastComments} />
               </Switch>
             </Router>
           </div>

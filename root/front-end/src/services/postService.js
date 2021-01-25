@@ -43,17 +43,16 @@ class postService {
         })
     }
 
-    register(username, email, password) {
-        return axios.post(API_URL + "signup", {
-            username,
-            email,
-            password
-        });
+    findCommentsByImageId(image_id) {
+        const path = "comments/" + image_id;
+        return axios.get(API_URL + path)
+        .then(response => {
+            if (response) {
+                return response
+            }
+        })
     }
 
-    getCurrentUser() {
-        return JSON.parse(localStorage.getItem('user'));
-    }
 }
 
 export default new postService();
