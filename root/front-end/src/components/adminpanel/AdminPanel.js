@@ -5,6 +5,8 @@ import { Container, Nav, Card, Form, Row } from "react-bootstrap";
 
 class AdminPanel extends Component {
     render() {
+        const user = JSON.parse(localStorage.getItem('user'));
+        console.log(this.props);
         return (
             <div>
                 <Header />
@@ -26,7 +28,7 @@ class AdminPanel extends Component {
                         
                         <Card.Body>
                         <img className="profile__picture" />
-                            <Card.Title>cebattal</Card.Title>
+                            <Card.Title>{user.username}</Card.Title>
                             <Card.Text style={{ borderBottom: "1px solid lightgrey", padding: "20px"}}>
                                 This is your admin panel. You can add today's image and browse older images.
                             </Card.Text>

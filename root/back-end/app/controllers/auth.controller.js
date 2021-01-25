@@ -85,3 +85,22 @@ exports.signin = (req, res) => {
             res.status(500).send({ message: err.message });
         });
 };
+
+exports.findProfilePic = (req, res) => {
+    return User.findAll({
+        attributes: ['profilePic'],
+        where: {
+            id: req.body.user_id
+        }
+    }).then((profilePic) => {
+        if (!profilePic) {
+            return res.status(404).send({ message: "Profile pic not found!" });
+        }
+        console.log("response:", profilePic)
+        res.status(200).send({
+            profilePic: profilePic
+        });
+    }).catch((err) => {
+        res.status(500).send({ message: err.message });
+    });
+  };
