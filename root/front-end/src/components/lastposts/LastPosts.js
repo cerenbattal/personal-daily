@@ -98,10 +98,17 @@ class LastPosts extends Component {
                                 <Container>
                                     <Row xs={1} md={2}>
                                         <Col>
-                                            <p>
-                                            <span className="username" style={{ 
-                                                color: "lightgray", marginRight: "30px"
-                                            }}>userid: {comment.user_id} - </span>
+                                            <p 
+                                                style={{ 
+                                                    fontSize: "12px"
+                                                }}
+                                            >
+                                            <span 
+                                                className="username" 
+                                                style={{ 
+                                                    color: "gray", marginRight: "30px"
+                                                }}
+                                            >userid: {comment.user_id} - </span>
                                                 {comment.comment_text}
                                             </p>
                                         </Col>

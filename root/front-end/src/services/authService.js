@@ -36,7 +36,9 @@ class AuthService {
 
     findProfilePicOfUser(user_id) {
         return axios.get(API_URL + "profilepic", {
-            user_id
+            params: { 
+                id: user_id 
+            }
         })
         .then(response => {
             if (response) {

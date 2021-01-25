@@ -59,11 +59,31 @@ export default class Login extends Component {
                 (response) => {
                     if(response.roles[0] === 'ROLE_ADMIN') {
                         this.props.history.push("/admin-panel");
-                        window.location.reload();
+                        //window.location.reload();
                     } else if(response.roles[0] === 'ROLE_USER') {
                         this.props.history.push("/dashboard");
                         window.location.reload();
                     }
+
+                    const user_id = response.id;
+                    console.log("user_id: ", user_id)
+                    AuthService.findProfilePicOfUser(user_id).then((response) => {
+                        console.log(response);
+                        this.setState({
+                            message: response
+                        });
+                    }, (error) => {
+                        const resMessage =
+                                (error.response &&
+                                    error.response.data &&
+                                    error.response.data.message) ||
+                                error.message ||
+                                error.toString();
+        
+                            this.setState({
+                                message: resMessage
+                            });
+                    })
                 },
                 error => {
                     const resMessage =
