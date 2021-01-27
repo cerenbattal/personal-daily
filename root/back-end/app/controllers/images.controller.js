@@ -34,14 +34,15 @@ exports.saveComment = (req, res) => {
 
 //TODO
 exports.findImageByDate = (req, res) => {
-    return Images.findAll({
+    return Images.findOne({
+        attributes: ['source'],
         where: {
-            posted_date: req.params.date
+            posted_date: req.query.posted_date
         }
     })
     .then((data) => {
         if (!data) {
-            return res.status(404).send({ message: "Comments not found!" });
+            return res.status(404).send({ message: "Image not found!" });
         }
         res.status(200).send({
             imgData: data[0].dataValues.source
