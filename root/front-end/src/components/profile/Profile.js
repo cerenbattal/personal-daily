@@ -11,42 +11,87 @@ class Profile extends Component {
         const profile_picture = {
             backgroundImage: `url(${userProfilePic.profilePic})`
         };
-        return (
-            <div className="profile">
-                {/** Header */}
-                <Header />
+        if(user.roles[0] === 'ROLE_ADMIN') {
+            return (
+                <div className="profile">
+                    {/** Header */}
+                    <Header />
 
-                {/** Profile Card */}
-                <Card className="text-center">
-                <Card.Header>
-                    <Nav variant="pills">
-                        <Nav.Item>
-                            <Nav.Link>
-                                <Link to="/profile"> 
-                                    Profile
-                                </Link>
-                            </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link> 
-                                <Link to="/last-comments"> 
-                                    Your last comments
-                                </Link>
-                            </Nav.Link>
-                        </Nav.Item>
-                    </Nav>
-                </Card.Header>
-                
-                <Card.Body>
-                <img style={profile_picture} className="profile__picture" />
-                    <Card.Title>{user.username}</Card.Title>
-                    <Card.Text>
-                        {user.email}
-                    </Card.Text>
-                </Card.Body>
-            </Card>
-            </div>
-        );
+                    {/** Profile Card */}
+                    <Card className="text-center">
+                    <Card.Header>
+                        <Nav variant="pills">
+                            <Nav.Item>
+                                <Nav.Link>
+                                    <Link to="/profile"> 
+                                        Profile
+                                    </Link>
+                                </Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link> 
+                                    <Link to="/last-comments"> 
+                                        Your last comments
+                                    </Link>
+                                </Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link href="/admin-panel">Admin Panel</Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                        
+                    </Card.Header>
+                    
+                    <Card.Body>
+                    <img style={profile_picture} className="profile__picture" />
+                        <Card.Title>{user.username}</Card.Title>
+                        <Card.Text>
+                            {user.email}
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+                </div>
+            );
+        } else {
+            return (
+                <div className="profile">
+                    {/** Header */}
+                    <Header />
+
+                    {/** Profile Card */}
+                    <Card className="text-center">
+                    <Card.Header>
+                        <Nav variant="pills">
+                            <Nav.Item>
+                                <Nav.Link>
+                                    <Link to="/profile"> 
+                                        Profile
+                                    </Link>
+                                </Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link> 
+                                    <Link to="/last-comments"> 
+                                        Your last comments
+                                    </Link>
+                                </Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                        
+                    </Card.Header>
+                    
+                    <Card.Body>
+                    <img style={profile_picture} className="profile__picture" />
+                        <Card.Title>{user.username}</Card.Title>
+                        <Card.Text>
+                            {user.email}
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+                </div>
+            );
+        }
+        
     }
 }
 

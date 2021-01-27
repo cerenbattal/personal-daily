@@ -12,7 +12,7 @@ class postService {
             })
             .then(response => {
                 if (response.data.message) {
-                    console.log(response.message);
+                    return response.data.message;
                 }
 
             });
@@ -46,6 +46,19 @@ class postService {
     findCommentsByImageId(image_id) {
         const path = "comments/" + image_id;
         return axios.get(API_URL + path)
+        .then(response => {
+            if (response) {
+                return response
+            }
+        })
+    }
+
+    findImageByDate(date) {
+        return axios.get(API_URL + "images/date", {
+            params: { 
+                posted_date: date
+            }
+        })
         .then(response => {
             if (response) {
                 return response

@@ -151,7 +151,6 @@ export default class Login extends Component {
                             style={{ display: "none" }}
                             ref={form => {
                                 this.checkBtn = form;
-                                console.log(form)
                             }}
                         />
                     </Form>
