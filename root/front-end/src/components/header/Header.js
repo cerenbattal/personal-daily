@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar } from "react-bootstrap";
+import { Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import './Header.css';
 
@@ -18,10 +18,26 @@ class Header extends Component {
                         </Link>
                         <Navbar.Toggle />
                         <Navbar.Collapse className="justify-content-end">
-                        <Navbar.Text>
-                            <img style={profile_picture} className="header__profile" /> 
+                        
+                        <img style={profile_picture} className="header__profile" /> 
+                        <NavDropdown title={user.username} id="collasible-nav-dropdown">
+                            <NavDropdown.Item>
+                                <Link to="/profile">Profile</Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item>
+                                <Link to="/login">Logout</Link>
+                            </NavDropdown.Item>
+                        </NavDropdown>
+
+                        {/**
+                            <Navbar.Text>
+                            
                             <Link style={{ color: '#0056b3'}} to="/profile">{user.username}</Link>
-                        </Navbar.Text>
+                            </Navbar.Text>
+                        
+                        */}
+                        
                         </Navbar.Collapse>
                     </Navbar>
                 </div>
