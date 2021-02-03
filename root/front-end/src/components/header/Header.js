@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import './Header.css';
+import AuthService from "../../services/authService";
 
 class Header extends Component {
+    logOut = () => {
+        AuthService.logout();
+    }
     render() {
         const user = JSON.parse(localStorage.getItem('user'));
         const userProfilePic = JSON.parse(localStorage.getItem('userProfilePic'));
@@ -26,7 +30,7 @@ class Header extends Component {
                             </NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item>
-                                <Link to="/login">Logout</Link>
+                                <Link to="/login" onClick={this.logOut}>Logout</Link>
                             </NavDropdown.Item>
                         </NavDropdown>
 
