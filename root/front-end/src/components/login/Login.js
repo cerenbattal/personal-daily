@@ -57,6 +57,25 @@ export default class Login extends Component {
         if (this.checkBtn.context._errors.length === 0) {
             AuthService.login(this.state.username, this.state.password).then(
                 (response) => {
+                    const user_id = response.id;
+                    console.log("user_id: ", user_id)
+                    AuthService.findProfilePicOfUser(user_id).then((picture) => {
+                        console.log(picture);
+                        this.setState({
+                            message: picture
+                        });
+                    }, (error) => {
+                        const errMsg =
+                                (error.response &&
+                                    error.response.data &&
+                                    error.response.data.message) ||
+                                error.message ||
+                                error.toString();
+        
+                            this.setState({
+                                message: errMsg,
+                            });
+                    })
                     if(response.roles[0] === 'ROLE_ADMIN') {
                         this.props.history.push("/admin-panel");
                         //window.location.reload();
@@ -65,25 +84,6 @@ export default class Login extends Component {
                         window.location.reload();
                     }
 
-                    const user_id = response.id;
-                    console.log("user_id: ", user_id)
-                    AuthService.findProfilePicOfUser(user_id).then((response) => {
-                        console.log(response);
-                        this.setState({
-                            message: response
-                        });
-                    }, (error) => {
-                        const resMessage =
-                                (error.response &&
-                                    error.response.data &&
-                                    error.response.data.message) ||
-                                error.message ||
-                                error.toString();
-        
-                            this.setState({
-                                message: resMessage
-                            });
-                    })
                 },
                 error => {
                     const resMessage =
