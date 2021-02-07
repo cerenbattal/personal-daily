@@ -32,12 +32,11 @@ exports.saveComment = (req, res) => {
     });
 };
 
-//TODO
 exports.findImageByDate = (req, res) => {
     return Images.findOne({
         attributes: ['source'],
         where: {
-            posted_date: req.query.posted_date
+            posted_date: req.params.date
         }
     })
     .then((data) => {
@@ -45,7 +44,7 @@ exports.findImageByDate = (req, res) => {
             return res.status(404).send({ message: "Image not found!" });
         }
         res.status(200).send({
-            imgData: data.imgData
+            imgData: data
         });
     })
     .catch((err) => {
