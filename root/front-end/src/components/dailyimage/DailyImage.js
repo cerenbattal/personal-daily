@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "./DailyImage.css"
 import post from './post.jpg';
 import CommentAndScore from "../commentandscore/CommentAndScore";
+import postService from "../../services/postService";
 import { Form } from "react-bootstrap"
 
 
@@ -10,7 +11,8 @@ class DailyImage extends Component {
         super(props);
         this.state = {
             avgScore: "",
-            post: ""
+            todaysPost: "",
+            message: "",
         };
     }
     setColorForGoodAndBadAvg = (avgScore) => {
@@ -22,6 +24,42 @@ class DailyImage extends Component {
             return "#43aa8b";
         }
     }
+
+    getDailyImage(date) {
+        return new Promise((resolve, reject) => {
+            postService.findImageByDate(date)
+            .then(
+                (response) => {
+                    console.log(response)
+                    resolve(response)
+                },
+                (error) => {
+                    const resMessage =
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString();
+                    reject(resMessage)
+                }
+            );
+        })
+    }
+
+    componentDidMount() {
+        let date = new Date(2021, 0, 21).toISOString().slice(0, 19).replace('T', ' ');
+        console.log(date)
+        this.getDailyImage(date).then((res) => {
+            this.setState({
+                todaysPost: res
+            });
+        }, (error) => {
+            this.setState({
+                message: error
+            });
+        });
+    }
+
     render() {
         const avgScore = "8.7";
         const scoreColor = this.setColorForGoodAndBadAvg(avgScore);

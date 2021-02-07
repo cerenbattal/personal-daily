@@ -64,6 +64,11 @@ export default class Login extends Component {
                         this.setState({
                             message: picture
                         });
+                        if(response.roles[0] === 'ROLE_ADMIN') {
+                            this.props.history.push("/admin-panel");
+                        } else if(response.roles[0] === 'ROLE_USER') {
+                            this.props.history.push("/dashboard");
+                        }
                     }, (error) => {
                         const errMsg =
                                 (error.response &&
@@ -76,14 +81,6 @@ export default class Login extends Component {
                                 message: errMsg,
                             });
                     })
-                    if(response.roles[0] === 'ROLE_ADMIN') {
-                        this.props.history.push("/admin-panel");
-                        //window.location.reload();
-                    } else if(response.roles[0] === 'ROLE_USER') {
-                        this.props.history.push("/dashboard");
-                        window.location.reload();
-                    }
-
                 },
                 error => {
                     const resMessage =
