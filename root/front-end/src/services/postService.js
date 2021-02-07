@@ -54,11 +54,9 @@ class postService {
     }
 
     findImageByDate(date) {
-        return axios.get(API_URL + "images/date", {
-            params: { 
-                posted_date: date
-            }
-        })
+        const path = "images/" + date;
+        console.log(path)
+        return axios.get(API_URL + path)
         .then(response => {
             if (response) {
                 return response

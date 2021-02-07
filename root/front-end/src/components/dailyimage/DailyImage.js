@@ -46,10 +46,12 @@ class DailyImage extends Component {
         })
     }
 
+    // TODO: source'u aldın, ui'da göstert
     componentDidMount() {
         let date = new Date(2021, 0, 21).toISOString().slice(0, 19).replace('T', ' ');
         console.log(date)
         this.getDailyImage(date).then((res) => {
+            console.log(res.data.imgData.source)
             this.setState({
                 todaysPost: res
             });
