@@ -45,7 +45,7 @@ exports.findImageByDate = (req, res) => {
             return res.status(404).send({ message: "Image not found!" });
         }
         res.status(200).send({
-            imgData: data[0].dataValues.source
+            imgData: data.imgData
         });
     })
     .catch((err) => {
