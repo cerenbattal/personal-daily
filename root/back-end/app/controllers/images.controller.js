@@ -34,7 +34,7 @@ exports.saveComment = (req, res) => {
 
 exports.findImageByDate = (req, res) => {
     return Images.findOne({
-        attributes: ['source'],
+        attributes: ['source', 'average_score'],
         where: {
             posted_date: req.params.date
         }
