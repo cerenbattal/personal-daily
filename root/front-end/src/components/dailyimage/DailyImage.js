@@ -13,8 +13,10 @@ class DailyImage extends Component {
             avgScore: "",
             todaysPost: "",
             message: "",
+            isThereTodaysPost: false,
         };
     }
+
     setColorForGoodAndBadAvg = (avgScore) => {
         if(avgScore > 0 && avgScore < 5) {
             return "#dc2f02";
@@ -46,14 +48,15 @@ class DailyImage extends Component {
         })
     }
 
-    // TODO: source'u aldın, ui'da göstert
     componentDidMount() {
-        let date = new Date(2021, 0, 21).toISOString().slice(0, 19).replace('T', ' ');
+        const date = new Date().toJSON().slice(0,10);
         console.log(date)
         this.getDailyImage(date).then((res) => {
-            console.log(res.data.imgData.source)
+            console.log(res)
             this.setState({
-                todaysPost: res
+                isThereTodaysPost: true,
+                todaysPost: res.data.imgData.source,
+                avgScore: res.data.imgData.average_score
             });
         }, (error) => {
             this.setState({
@@ -63,25 +66,35 @@ class DailyImage extends Component {
     }
 
     render() {
-        const avgScore = "8.7";
+        const { avgScore, todaysPost, isThereTodaysPost } = this.state;
         const scoreColor = this.setColorForGoodAndBadAvg(avgScore);
-        return (
-            <div className="post">
-                {/** image section */}
-                <img className="post__image" src={post}></img>
 
-                {/** average score section */}
-                <Form.Label className="post__averageScore">
-                    <span style={{ color: `${scoreColor}` }} >{avgScore}</span> out of 10
-                </Form.Label>
+        if(isThereTodaysPost) {
+            return(
+                <div className="post">
+                    {/** image section */}
+                    <img className="post__image" src={todaysPost}></img>
 
-                {/** Comment and Score section */}
-                <div className="comment__score">
-                    <CommentAndScore />
-                </div>
+                    {/** average score section */}
+                    <Form.Label className="post__averageScore">
+                        <span style={{ color: `${scoreColor}` }}>{avgScore}</span> out of 10
+                    </Form.Label>
+
+                    {/** Comment and Score section */}
+                    <div className="comment__score">
+                        <CommentAndScore />
+                    </div>
                 
-            </div>
-        )
+                </div>
+            );
+        } else {
+            return(
+                <div className="post">
+                    Unfortunately, today's picture has not come yet!
+                </div>
+            );
+        }
+
     }
 }
 
